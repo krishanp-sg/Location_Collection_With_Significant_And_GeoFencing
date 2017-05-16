@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LocationCollectionWithSignificantLocationUpdate" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mdS-Gw-y32">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location Count : 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGk-Ad-vVx">
+                                        <rect key="frame" x="218" y="22" width="149" height="21"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.47843137250000001" green="0.67843137249999996" blue="0.90588235289999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="dGk-Ad-vVx" secondAttribute="trailing" constant="8" id="2BJ-Cb-HZJ"/>
+                                    <constraint firstItem="dGk-Ad-vVx" firstAttribute="centerY" secondItem="mdS-Gw-y32" secondAttribute="centerY" id="6bM-OY-ywa"/>
+                                    <constraint firstAttribute="height" constant="64" id="AfJ-iw-X3n"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="E5z-En-Qza">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="nYu-x4-OtR"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="NeN-fe-H2w"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="E5z-En-Qza" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="F1e-W0-c0c"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="E5z-En-Qza" secondAttribute="bottom" id="JGm-Im-Lj6"/>
+                            <constraint firstAttribute="trailing" secondItem="E5z-En-Qza" secondAttribute="trailing" id="KZR-hG-Dt2"/>
+                            <constraint firstItem="mdS-Gw-y32" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ddO-ed-Xo7"/>
+                            <constraint firstItem="mdS-Gw-y32" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="gSH-Q6-fBl"/>
+                            <constraint firstItem="E5z-En-Qza" firstAttribute="top" secondItem="mdS-Gw-y32" secondAttribute="bottom" id="qoM-TR-JQS"/>
+                            <constraint firstAttribute="trailing" secondItem="mdS-Gw-y32" secondAttribute="trailing" id="yPb-Fr-TOE"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="locationCountLabel" destination="dGk-Ad-vVx" id="nVM-FA-XKk"/>
+                        <outlet property="locationTableView" destination="E5z-En-Qza" id="Xba-9N-9GK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+        </scene>
+    </scenes>
+</document>
