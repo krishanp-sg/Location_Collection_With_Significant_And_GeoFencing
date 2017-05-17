@@ -17,14 +17,15 @@ class CommonHelper: NSObject {
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let myString = formatter.string(from: Date())
         let yourDate = formatter.date(from: myString)
-        formatter.dateFormat = "dd-MMM-yyyy HH:mm"
+        formatter.dateFormat = "dd-MMM-yyyy HH:mm:ss"
         let myStringafd = formatter.string(from: yourDate!)
         
         return myStringafd
     }
     
     static func writeToFile(_ stringToWrite : String){
-
+        
+        debugPrint(stringToWrite)
         do {
             let dir: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last! as URL
             let url = dir.appendingPathComponent(file)

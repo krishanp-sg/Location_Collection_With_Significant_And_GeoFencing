@@ -7,6 +7,7 @@
 
 #import "BackgroundTaskManager.h"
 
+
 @interface BackgroundTaskManager()
 @property (nonatomic, strong)NSMutableArray* bgTaskIdList;
 @property (assign) UIBackgroundTaskIdentifier masterTaskId;
@@ -42,6 +43,11 @@
     if([application respondsToSelector:@selector(beginBackgroundTaskWithExpirationHandler:)]){
         bgTaskId = [application beginBackgroundTaskWithExpirationHandler:^{
             NSLog(@"background task %lu expired", (unsigned long)bgTaskId);
+            
+            if (bgTaskId == self.masterTaskId) {
+                [self.delegate masterTaskExpired];
+                self.masterTaskId = UIBackgroundTaskInvalid;
+            }
             
             [self.bgTaskIdList removeObject:@(bgTaskId)];
             [application endBackgroundTask:bgTaskId];

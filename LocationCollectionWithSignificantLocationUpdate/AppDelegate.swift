@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 locationManager.setupLocationManager()
                 if let launchOptions = launchOptions {
                     if launchOptions[UIApplicationLaunchOptionsKey.location] != nil {
-                        CommonHelper.writeToFile("Did Finish Launching With launchOptions Key Significant Locatin Update ")
+                        CommonHelper.writeToFile("Did Finish Launching With launchOptions Key Significant Location Update ")
                         locationManager.appMovedToBackground()
                         NotificationHelper.sharedNotificationManager.addLocalNotification("App Woke up from Significant Location Update", subtitle: "", message: "")
                     }

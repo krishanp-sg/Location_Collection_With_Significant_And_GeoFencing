@@ -8,8 +8,14 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface BackgroundTaskManager : NSObject
+@protocol BackgroundMansterTaskExpireDelagte
 
+-(void)masterTaskExpired;
+
+@end
+
+@interface BackgroundTaskManager : NSObject 
+@property (weak) id <BackgroundMansterTaskExpireDelagte> delegate;
 +(instancetype)sharedBackgroundTaskManager;
 
 -(UIBackgroundTaskIdentifier)beginNewBackgroundTask;

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6A24BF291ECAB12D00DD16C6 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A211F2C1ECAA4CA00E073C7 /* NotificationHelper.swift */; };
 		6A24BF2C1ECAB26600DD16C6 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A211F2C1ECAA4CA00E073C7 /* NotificationHelper.swift */; };
+		6A52E0CE1ECC4CA800621519 /* Los_Angels.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 6A52E0CD1ECC4CA800621519 /* Los_Angels.gpx */; };
+		6A52E0D01ECC560500621519 /* LOndon.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 6A52E0CF1ECC560500621519 /* LOndon.gpx */; };
 		6AD1C19C1EC99BC50048841E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD1C19B1EC99BC50048841E /* AppDelegate.swift */; };
 		6AD1C19E1EC99BC50048841E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD1C19D1EC99BC50048841E /* ViewController.swift */; };
 		6AD1C1A11EC99BC50048841E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AD1C19F1EC99BC50048841E /* Main.storyboard */; };
@@ -64,6 +66,8 @@
 
 /* Begin PBXFileReference section */
 		6A211F2C1ECAA4CA00E073C7 /* NotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
+		6A52E0CD1ECC4CA800621519 /* Los_Angels.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Los_Angels.gpx; sourceTree = "<group>"; };
+		6A52E0CF1ECC560500621519 /* LOndon.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LOndon.gpx; sourceTree = "<group>"; };
 		6AD1C1981EC99BC50048841E /* SignificantLocationChange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignificantLocationChange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD1C19B1EC99BC50048841E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6AD1C19D1EC99BC50048841E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 		6AD1C18F1EC99BC50048841E = {
 			isa = PBXGroup;
 			children = (
+				6A52E0CF1ECC560500621519 /* LOndon.gpx */,
+				6A52E0CD1ECC4CA800621519 /* Los_Angels.gpx */,
 				6AD1C19A1EC99BC50048841E /* LocationCollectionWithSignificantLocationUpdate */,
 				6AD1C1B21EC99BC50048841E /* LocationCollectionWithSignificantLocationUpdateTests */,
 				6AD1C1BD1EC99BC50048841E /* LocationCollectionWithSignificantLocationUpdateUITests */,
@@ -409,8 +415,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AD1C1A91EC99BC50048841E /* LaunchScreen.storyboard in Resources */,
+				6A52E0D01ECC560500621519 /* LOndon.gpx in Resources */,
 				6AD1C1A61EC99BC50048841E /* Assets.xcassets in Resources */,
 				6AD1C1EA1EC9A1E90048841E /* LocationCellTableViewCell.xib in Resources */,
+				6A52E0CE1ECC4CA800621519 /* Los_Angels.gpx in Resources */,
 				6AD1C1A11EC99BC50048841E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,7 +13,7 @@ class LocationManagerRegionMonitoring: NSObject {
     
     private let distanceFilter  = 50.0
     private static let REGION_IDENTIFIER = "IDLERegion"
-    private static let REGION_RADIUS = 20.0
+    private static let REGION_RADIUS = 100.0
     
     static let sharedManager = LocationManagerRegionMonitoring()
     
@@ -22,6 +22,7 @@ class LocationManagerRegionMonitoring: NSObject {
     fileprivate var isAppInBackground : Bool = false
     fileprivate var userLastLocation : CLLocation?
     fileprivate var regionToMonitor : CLRegion?
+    fileprivate var isRegionMonitoring : Bool = false
     
     required override init() {
         super.init()
@@ -34,7 +35,8 @@ class LocationManagerRegionMonitoring: NSObject {
         // App Will Enter Foreground
         notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         
-        
+        self.locationShareModel.bagTaskManager = BackgroundTaskManager.shared()
+        self.locationShareModel.bagTaskManager?.delegate = self
     }
     
     // Setup Normal LocationManager
@@ -55,13 +57,18 @@ class LocationManagerRegionMonitoring: NSObject {
     // Stop Location Manager
     func stopLocationManager(){
         
-        CommonHelper.writeToFile("Location Manager Stopped ")
-        self.locationManager.stopUpdatingLocation()
+        if !isRegionMonitoring {
+            CommonHelper.writeToFile("Location Manager Stopped ")
+            self.locationManager.stopUpdatingLocation()
+        }
+        
+
     }
     
     // restart Location Manager
     func restartLocationUpdate(){
-        CommonHelper.writeToFile("Location Manager Restarted ")
+        
+        self.locationShareModel.bagTaskManager?.beginNewBackgroundTask()
         
         if self.locationShareModel.backgroundTimer != nil {
             self.locationShareModel.backgroundTimer?.invalidate()
@@ -69,6 +76,8 @@ class LocationManagerRegionMonitoring: NSObject {
         }
         
         self.locationManager.startUpdatingLocation()
+                
+        CommonHelper.writeToFile("Location Manager Restarted ")
     }
     
     //App Moved To Background
@@ -78,7 +87,7 @@ class LocationManagerRegionMonitoring: NSObject {
         self.locationManager.stopUpdatingLocation()
         self.locationManager.startUpdatingLocation()
         
-        self.locationShareModel.bagTaskManager = BackgroundTaskManager.shared()
+        
         self.locationShareModel.bagTaskManager?.beginNewBackgroundTask()
         
     }
@@ -90,6 +99,7 @@ class LocationManagerRegionMonitoring: NSObject {
         self.isAppInBackground = false
         stopBackgroundTimers()
         stopLocationManager()
+        stopMonitoringRegions()
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.startUpdatingLocation()
     }
@@ -104,22 +114,24 @@ class LocationManagerRegionMonitoring: NSObject {
     // Stop Timer
     func stopBackgroundTimers(){
         
+        CommonHelper.writeToFile("Stopping Background Timers ")
+        
         if self.locationShareModel.backgroundTimer != nil {
             self.locationShareModel.backgroundTimer?.invalidate()
             self.locationShareModel.backgroundTimer = nil
         }
         
         if self.locationShareModel.stopLocationManagerAfter10sTimer != nil {
-            self.locationShareModel.backgroundTimer?.invalidate()
-            self.locationShareModel.backgroundTimer = nil
+            self.locationShareModel.stopLocationManagerAfter10sTimer?.invalidate()
+            self.locationShareModel.stopLocationManagerAfter10sTimer = nil
         }
     }
     
     func setupRegionMonitoring(){
       
-        
-        stopLocationManager()
         stopBackgroundTimers()
+        stopLocationManager()
+ 
 
         isAppInBackground = true
         
@@ -131,6 +143,7 @@ class LocationManagerRegionMonitoring: NSObject {
                 regionToMonitor!.notifyOnExit = true
                 regionToMonitor!.notifyOnEntry = true
                 self.locationManager.startMonitoring(for: regionToMonitor!)
+                self.isRegionMonitoring = true
                 CommonHelper.writeToFile("Setup Region Monitoring Called success ")
             }
             
@@ -140,7 +153,7 @@ class LocationManagerRegionMonitoring: NSObject {
     }
     
     func stopMonitoringRegions(){
-        
+        self.isRegionMonitoring = false
         for region in self.locationManager.monitoredRegions {
             guard let circularRegion = region as? CLCircularRegion, circularRegion.identifier == LocationManagerRegionMonitoring.REGION_IDENTIFIER else { continue }
             self.locationManager.stopMonitoring(for: circularRegion)
@@ -154,7 +167,7 @@ class LocationManagerRegionMonitoring: NSObject {
             return
         }
         
-        self.locationShareModel.bagTaskManager = BackgroundTaskManager.shared()
+        
         self.locationShareModel.bagTaskManager?.beginNewBackgroundTask()
         
         self.locationShareModel.backgroundTimer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(restartLocationUpdate), userInfo: nil, repeats: false)
@@ -171,7 +184,7 @@ class LocationManagerRegionMonitoring: NSObject {
 
 }
 
-extension LocationManagerRegionMonitoring : CLLocationManagerDelegate {
+extension LocationManagerRegionMonitoring : CLLocationManagerDelegate, BackgroundMansterTaskExpireDelagte {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         debugPrint("Location Manager Error : \(error.localizedDescription)")
@@ -189,7 +202,7 @@ extension LocationManagerRegionMonitoring : CLLocationManagerDelegate {
         
         userLastLocation = locations.last!
         
-        debugPrint("Did Update Location Called")
+        CommonHelper.writeToFile("Did Update Locations Called ")
         
         // If the user is IDLE for 5 minutes turn off the location and Start Significant location update.
         if let lastUserLocation = LocationDataAccess.getLastInsertedUserLocation(), isAppInBackground {
@@ -200,6 +213,7 @@ extension LocationManagerRegionMonitoring : CLLocationManagerDelegate {
             
             if locations.last!.distance(from: lastLocation) < 100 && locations.last!.timestamp.timeIntervalSince(lastUserLocation.collectedtime as! Date) > 300 {
                 
+                CommonHelper.writeToFile("Setting Up Region Monitoring, because user is in IDLE state ")
                 setupRegionMonitoring()
                 
                 return
@@ -211,7 +225,7 @@ extension LocationManagerRegionMonitoring : CLLocationManagerDelegate {
         LocationDataAccess.insertLocationToDataBase(userLocation: locations.last!)
         
         if isAppInBackground {
-            
+            CommonHelper.writeToFile("Locations Did update locations method. starting timer ")
             startTimers()
             
         }
@@ -220,26 +234,35 @@ extension LocationManagerRegionMonitoring : CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-       
+        self.locationShareModel.bagTaskManager?.endAllBackgroundTasks()
+        self.locationShareModel.bagTaskManager?.beginNewBackgroundTask()
         CommonHelper.writeToFile("User Entered In to The region ")
-        self.locationManager.stopMonitoring(for: region)
-        self.setupLocationManager()
+        stopMonitoringRegions()
+//        self.setupLocationManager()
         self.appMovedToBackground()
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         print("User Left The Region")
         // TODO : User have exits the idle position. Stop monitoring region and remove the existing regions. and start location update.
-        
+        self.locationShareModel.bagTaskManager?.endAllBackgroundTasks()
+         self.locationShareModel.bagTaskManager?.beginNewBackgroundTask()
     
         CommonHelper.writeToFile("User Left The region ")
-        self.locationManager.stopMonitoring(for: region)
-        self.setupLocationManager()
-        debugPrint("didExitRegion")
+        stopMonitoringRegions()
+//        self.setupLocationManager()
         self.appMovedToBackground()
         
     }
 
-    
+    func masterTaskExpired() {
+        CommonHelper.writeToFile("Setting Up Region Monitoring, because master task expired ")
+        
+        if self.isRegionMonitoring {
+            CommonHelper.writeToFile("Region Monitor already started, No need to start again. For Testing we still start. Next time no need to start. ")
+//            return
+        }
+        setupRegionMonitoring()
+    }
     
 }

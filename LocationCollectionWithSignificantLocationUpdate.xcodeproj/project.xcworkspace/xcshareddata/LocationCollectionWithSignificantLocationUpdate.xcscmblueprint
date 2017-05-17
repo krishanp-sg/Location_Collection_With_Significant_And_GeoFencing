@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "0A8667B66382AF79DF1E97DC3D1BD4BC1225FAE9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "0A8667B66382AF79DF1E97DC3D1BD4BC1225FAE9" : 9223372036854775807,
+    "D1EEEA3EA3AE1630953BC7F7D966EBE5F65997F9" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "6F57BC9E-E759-4F0B-887D-C259FE102C0B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "0A8667B66382AF79DF1E97DC3D1BD4BC1225FAE9" : "LocationCollectionWithSignificantLocationUpdate\/",
+    "D1EEEA3EA3AE1630953BC7F7D966EBE5F65997F9" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "LocationCollectionWithSignificantLocationUpdate",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "LocationCollectionWithSignificantLocationUpdate.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/krishanp-sg\/Location_Collection_With_Significant_And_GeoFencing.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0A8667B66382AF79DF1E97DC3D1BD4BC1225FAE9"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/krishanp-sg\/PixErf-Insta-Assignment.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D1EEEA3EA3AE1630953BC7F7D966EBE5F65997F9"
+    }
+  ]
+}

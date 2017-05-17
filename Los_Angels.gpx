@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="Geovative Solutions GeoTours" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+
+<metadata>
+  <name>Los Angels California</name>
+  <desc>This self guided,GPS enabled tour of the world famous St. Louis Zoo, has 85 points of interest. Narratives in english,explaining each exhibit and provides guidance to zoo facilities.This audio tour guide can enhance your next visit.</desc>
+  <author>
+    <name>wizardone, using GeoTours</name>
+    <link href="http://www.geovative.com/view?t=GEIF">
+      <text>St Louis Zoo sample</text>
+    </link>
+  </author>
+  <link href="http://www.geovative.com/view?t=GEIF">
+    <text>St Louis Zoo sample</text>
+  </link>
+  <time>2008-02-26T19:49:13</time>
+  <keywords>Audio tour guide
+St.Louis Mo.
+Zoo
+Forest Park
+Animals</keywords>
+</metadata>
+
+
+<wpt lat="34.052235" lon="-118.243683">
+<name>JB</name>
+<desc>Transit For Johor</desc>
+<link href="Data/Location3152-1"/>
+<sym>PAJ</sym>
+<extensions>
+        <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensions/v3/GpxExtensionsv3.xsd">
+            <gpxx:Proximity>15.24</gpxx:Proximity>
+            <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+        </gpxx:WaypointExtension>
+</extensions>
+</wpt>
+</gpx>

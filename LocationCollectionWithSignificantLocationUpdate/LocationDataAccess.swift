@@ -42,7 +42,7 @@ class LocationDataAccess: NSObject {
         
         do {
                 try manageOBC.save()
-                debugPrint("Location Inserted")
+                 CommonHelper.writeToFile("Location Inserted ")
         } catch let error as NSError {
             print("Could Not Save. \(error) , \(error.localizedDescription)")
         }
